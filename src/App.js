@@ -4,6 +4,12 @@ import {
 } from 'react-router-dom';
 
 /**
+ * Import templates
+ */
+import "./assets/css/remixicon.css";
+import "./scss/style.scss";
+
+/**
  * Import middlewares
  */
 import * as Middleware from './middlewares/Core';
@@ -21,7 +27,6 @@ import NotFound from './handlers/NotFound';
  */
 import Login from './pages/auths/Login';
 import Dashboard from './pages/Dashboard';
-import Dashboard2 from './pages/Dashboard2';
 
 /**
  * Initiate auth routes
@@ -43,10 +48,6 @@ const dashboardRoutes = [
       {
         path: '/dashboard',
         element: <Middleware.Authenticated render={<Dashboard />} />
-      },
-      {
-        path: '/dashboard2/:id',
-        element: <Middleware.Authenticated render={<Dashboard2 />} />
       }
     ]
   }
