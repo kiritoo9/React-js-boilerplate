@@ -83,13 +83,6 @@ function Login() {
                         label="Password"
                         placeholder="Enter your password"
                     />
-
-                    {/* For example only */}
-                    <Components.Select 
-                        name="options"
-                        label="Gender"
-                        options={genders}
-                    />
                     <button className="btn btn-primary btn-sign" onClick={doLogin}>Sign In</button>
                 </div>
             </div>

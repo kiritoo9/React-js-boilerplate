@@ -27,6 +27,7 @@ import NotFound from './handlers/NotFound';
  */
 import Login from './pages/auths/Login';
 import Dashboard from './pages/Dashboard';
+import UserList from './pages/masters/users/List';
 
 /**
  * Initiate auth routes
@@ -48,6 +49,10 @@ const dashboardRoutes = [
       {
         path: '/dashboard',
         element: <Middleware.Authenticated render={<Dashboard />} />
+      },
+      {
+        path: '/users',
+        element: <Middleware.Authenticated render={<UserList />} />
       }
     ]
   }
