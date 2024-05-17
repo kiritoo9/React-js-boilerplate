@@ -1,6 +1,6 @@
 import State from "./../../libraries/State";
 
-function Input(props) {
+function Select(props) {
 
     /**
      * Call state core
@@ -12,33 +12,37 @@ function Input(props) {
      */
     const attributes = {
         direction: props?.direction !== undefined ? props.direction : 'vertical',
-        label: props?.label !== undefined ? props.label : 'Input',
-        type: props?.type !== undefined ? props.type : 'text',
+        label: props?.label !== undefined ? props.label : 'Select',
         name: props?.name !== undefined ? props.name : null,
-        placeholder: props?.placeholder !== undefined ? props.placeholder : '',
         className: props?.className !== undefined ? props.className : '',
+        options: props?.options !== undefined ? props.options : [],
     }
 
-    /** 
+    /**
      * Render view
-    */
+     */
     return (
         <div>
-            {attributes.direction?.toLowerCase() === 'vertical' && (
+            {(attributes.direction?.toLowerCase() === 'vertical' && attributes.options.length > 0) && (
                 <div className="mb-4">
                     <label className="form-label">{attributes.label}</label>
-                    <input 
-                        type={attributes.type}
-                        className="form-control" 
-                        placeholder={attributes.placeholder}
+                    <select 
+                        className="form-select"
                         onChange={(e) => {
                             if(attributes.name) state.setItem(attributes.name, e.target.value);
                         }}
-                    />
+                    >
+                        {attributes.options.map((v) => {
+                            return (
+                                <option value={v?.value}>{v?.label}</option>
+                            )
+                        })}
+                    </select>
                 </div>
             )}
         </div>
     )
+
 }
 
-export default Input;
+export default Select;
