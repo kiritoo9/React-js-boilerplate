@@ -15,44 +15,52 @@ function UserList() {
                     <Card.Title as="label" className="fs-sm fw-medium mb-1 text-white">User List</Card.Title>
                 </Card.Header>
                 <Card.Body className="bg-white">
-                <Grid
-                    className={{table: 'table table-bordered mb-0'}}
-                    resizable={true}
-                    columns={[
-                        'Pokemon',
-                        'URL'
-                    ]}
-                    server={{
-                        url: 'https://pokeapi.co/api/v2/pokemon',
-                        then: data => data.results.map(r => [
-                            r.name, 
-                            _(<a href={r.url}>Detail Informations to {r.name}</a>)
-                        ]),
-                        total: data => data.count
-                    }}
-                    pagination={{
-                        limit: 10,
-                        server: {
-                            url: (prev, page, limit) => {
-                                const operator = prev.includes('?') ? '&' : '?';
-                                return `${prev}${operator}limit=${limit}&offset=${page * limit}`
+                    <Grid
+                        className={{table: 'table table-bordered mb-0'}}
+                        resizable={true}
+                        language={{
+                            search: {
+                                placeholder: 'Find something..'
                             }
-                        }
-                    }}
-                    search={{
-                        server: {
-                            url: (prev, keyword) => `${prev}?search=${keyword}`
-                        }
-                    }}
-                    plugins={[
-                        {
-                            id: 'filter-date',
-                            component: FilterDate,
-                            order: 1,
-                            position: PluginPosition.Header
-                        }
-                    ]}
-                />
+                        }}
+                        columns={[
+                            'Pokemon',
+                            'URL'
+                        ]}
+                        server={{
+                            url: 'https://pokeapi.co/api/v2/pokemon',
+                            headers: {
+                                'authorization': `Bearer your_bearer`
+                            },
+                            then: data => data.results.map(r => [
+                                r.name, 
+                                _(<a href={r.url}>Detail Informations to {r.name}</a>)
+                            ]),
+                            total: data => data.count
+                        }}
+                        search={{
+                            server: {
+                                url: (prev, keyword) => `${prev}?search=${keyword}`
+                            }
+                        }}
+                        pagination={{
+                            limit: 10,
+                            server: {
+                                url: (prev, page, limit) => {
+                                    const operator = prev.includes('?') ? '&' : '?';
+                                    return `${prev}${operator}limit=${limit}&offset=${page * limit}`
+                                }
+                            }
+                        }}
+                        plugins={[
+                            {
+                                id: 'filter-date',
+                                component: FilterDate,
+                                order: 1,
+                                position: PluginPosition.Header
+                            }
+                        ]}
+                    />
                 </Card.Body>
             </Card>
         </div>

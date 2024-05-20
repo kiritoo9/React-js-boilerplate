@@ -16,6 +16,15 @@ function Select(props) {
         name: props?.name !== undefined ? props.name : null,
         className: props?.className !== undefined ? props.className : '',
         options: props?.options !== undefined ? props.options : [],
+        defaultValue: props?.defaultValue !== undefined ? props.defaultValue : '',
+    }
+
+    /**
+     * Set default value to state when this properties is not empty
+     * @var string attributes.defaultValue
+     */
+    if(attributes.defaultValue !== "") {
+        state.setItem(attributes.name, attributes.defaultValue);
     }
 
     /**
@@ -28,13 +37,14 @@ function Select(props) {
                     <label className="form-label">{attributes.label}</label>
                     <select 
                         className="form-select"
+                        defaultValue={attributes.defaultValue}
                         onChange={(e) => {
                             if(attributes.name) state.setItem(attributes.name, e.target.value);
                         }}
                     >
-                        {attributes.options.map((v) => {
+                        {attributes.options.map((v, i) => {
                             return (
-                                <option value={v?.value}>{v?.label}</option>
+                                <option key={i} value={v?.value}>{v?.label}</option>
                             )
                         })}
                     </select>
