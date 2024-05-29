@@ -18,19 +18,20 @@ function Input(props) {
         className: props?.className !== undefined ? props.className : '',
         defaultValue: props?.defaultValue !== undefined ? props.defaultValue : '',
         readOnly: props?.readOnly !== undefined ? props.readOnly : false,
+        validator: props?.validator !== undefined ? props.validator : {}
     }
 
     /**
-     * Set default value to state when this properties is not empty
-     * @var string attributes.defaultValue
+     * Regist this input to state
      */
-    if(attributes.defaultValue !== "") {
-        state.setItem(attributes.name, attributes.defaultValue);
-    }
+    if(attributes.name !== "") state.setItem(attributes.name, {
+        value: attributes.defaultValue,
+        validator: attributes.validator
+    });
 
     /** 
      * Render view
-    */
+     */
     return (
         <div>
             {attributes.direction?.toLowerCase() === 'vertical' && (

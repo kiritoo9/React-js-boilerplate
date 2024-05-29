@@ -76,14 +76,29 @@ function Login() {
                         name="email" 
                         label="Email address"
                         placeholder="Enter your email address"
+                        validator={{
+                            required: true,
+                            min_length: 0,
+                            max_length: 100,
+                            is_email: true
+                        }}
                     />
                     <Components.Input 
                         type="password"
                         name="password" 
                         label="Password"
                         placeholder="Enter your password"
+                        validator={{
+                            required: true,
+                            min_length: 4,
+                            max_length: 100
+                        }}
                     />
-                    <button className="btn btn-primary btn-sign" onClick={doLogin}>Sign In</button>
+                    <Components.Button
+                        label="Sign in"
+                        className="btn-primary btn-sign"
+                        action={doLogin}
+                    />
                 </div>
             </div>
         </div>

@@ -16,7 +16,7 @@ function Layout() {
                     <Outlet />
                 </main>
 
-                <div class="main-footer mt-5">
+                <div className="main-footer mt-5">
                     <span>&copy; {year}. ReactJS-Boilerplate</span>
                 </div>
             </div>

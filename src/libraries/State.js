@@ -2,13 +2,17 @@
  * CoreState Helper
  * Global state function for all cases
  * 
- * @version 1.0
+ * @version 1.1
  */
 
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 
-const pathname = window.location.pathname.replace(/\//g, '_');;
+var pathname = window.location.pathname.replace(/\//g, '_');
+pathname = pathname.replace(/&/g, '_');
+pathname = pathname.replace(/\?/g, '_');
+pathname = pathname.replace(/=/g, '_');
+pathname = pathname.replace(/-/g, '_');
 
 const Core = create(
     persist(
@@ -18,8 +22,16 @@ const Core = create(
                 if(parent) return get().collection[f] !== undefined ? get().collection[f] : null;
                 
                 if(get().collection[pathname] === undefined) return null;
-                return get().collection[pathname][f] !== undefined ? get().collection[pathname][f] : null;
-                
+                const data = get().collection[pathname][f];
+                if(data !== undefined) {
+                    return data?.value !== undefined ? data.value : data;
+                } else {
+                    return null;
+                }
+            },
+            getAllItem: (custom_pathname = '') => {
+                const path = custom_pathname ? custom_pathname : pathname;
+                return get().collection[path];
             },
             setItem: (f, v, parent = false) => {
                 let coll = get().collection;
@@ -28,10 +40,18 @@ const Core = create(
                     if(coll[pathname] === undefined) {
                         coll[pathname] = {[f]: v};
                     } else {
-                        coll[pathname][f] = v;
+                        if(coll[pathname][f]?.value !== undefined) {
+                            coll[pathname][f].value = v;
+                        } else {
+                            coll[pathname][f] = v;
+                        }
                     }
                 } else {
-                    coll[f] = v;
+                    if(coll[f]?.value !== undefined) {
+                        coll[f].value = v;
+                    } else {
+                        coll[f] = v;
+                    }
                 }
 
                 set({collection: coll});
