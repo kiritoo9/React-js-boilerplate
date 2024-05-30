@@ -49,6 +49,7 @@ function Select(props) {
                             )
                         })}
                     </select>
+                    <i className="text-danger" id={`${attributes.name}-error-message`}></i>
                 </div>
             )}
         </div>

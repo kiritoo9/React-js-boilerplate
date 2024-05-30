@@ -41,17 +41,13 @@ const Core = create(
                         coll[pathname] = {[f]: v};
                     } else {
                         if(coll[pathname][f]?.value !== undefined) {
-                            coll[pathname][f].value = v;
+                            coll[pathname][f].value = v?.value !== undefined ? v.value : v;
                         } else {
                             coll[pathname][f] = v;
                         }
                     }
                 } else {
-                    if(coll[f]?.value !== undefined) {
-                        coll[f].value = v;
-                    } else {
-                        coll[f] = v;
-                    }
+                    coll[f] = v;
                 }
 
                 set({collection: coll});

@@ -48,9 +48,18 @@ function Button(props) {
             if(attributes.action) attributes.action();
         } else {
             /**
-             * Send error response to the input component
+             * Show error response below the component
              */
-            console.log(error_messages);
+            for(let i = 0; i < error_messages.length; i++) {
+                const input_el = document.getElementById(`${error_messages[i].name}-error-message`);
+                
+                let msg = '';
+                for(let j = 0; j < error_messages[i].errors.length; j++) {
+                    msg += error_messages[i].errors[j];
+                    if(j < (error_messages[i].errors.length-1)) msg += `<br />`;
+                }
+                input_el.innerHTML = msg;
+            }
         }
     }
 

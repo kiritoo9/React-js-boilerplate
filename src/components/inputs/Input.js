@@ -49,6 +49,7 @@ function Input(props) {
                             if(attributes.name) state.setItem(attributes.name, e.target.value);
                         }}
                     />
+                    <i className="text-danger" id={`${attributes.name}-error-message`}></i>
                 </div>
             )}
         </div>
