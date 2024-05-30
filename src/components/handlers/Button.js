@@ -38,6 +38,11 @@ function Button(props) {
                     name: Object.keys(input_attributes)[i],
                     errors: validator
                 });
+            } else {
+                /**
+                 * Remove all error messages in component
+                 */
+                document.getElementById(`${Object.keys(input_attributes)[i]}-error-message`).innerHTML = '';
             }
         }
 
