@@ -9,7 +9,8 @@ function Authenticated(props) {
      * Get token from global state 
      * @param boolean - second parameter is flagging to get parent state
      */
-    const accessToken = State.getState().getItem('accessToken', true);
+    const state = new State().Storage.getState();
+    const accessToken = state.getItem('accessToken', true);
 
     /**
      * Validate accessToken before rendering

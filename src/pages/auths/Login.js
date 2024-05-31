@@ -4,7 +4,7 @@ import * as Components from "./../../components/Components";
 
 function Login() {
     const navigate = useNavigate();
-    const state = State.getState(); // load core state from library
+    const state = new State("custom_state_login").Storage.getState(); // load core state from library
 
     /**
     * Action handlers
@@ -52,16 +52,6 @@ function Login() {
     /**
      * Render view
      */
-    const genders = [
-        {
-            value: 'male',
-            label: 'Male'
-        },
-        {
-            value: 'female',
-            label: 'Female'
-        }
-    ];
     return (
         <div className="page-sign">
             <div className="card card-sign">

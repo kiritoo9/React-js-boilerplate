@@ -5,7 +5,7 @@ function Button(props) {
 	/**
 	 * Call global core
 	 */
-  	const state = State.getState();
+    const state = new State(null, true).Storage.getState();
 
     /**
      * Defining attributes

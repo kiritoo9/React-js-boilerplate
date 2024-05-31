@@ -5,7 +5,7 @@ function Select(props) {
     /**
      * Call state core
      */
-    const state = State.getState();
+    const state = new State(null, true).Storage.getState();
 
     /**
      * Defining attributes

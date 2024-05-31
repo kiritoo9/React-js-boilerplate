@@ -3,7 +3,8 @@ import axios from "axios";
 import State from "./State";
 
 class Rest {
-    state = State.getState();
+    state = new State().Storage.getState();
+    
     MAIN_HOST = process.env.REACT_APP_API_HOST_NAME;
     ACCESS_TOKEN = this.state.getItem('accessToken', true)?.token; // get token from global storage
 
